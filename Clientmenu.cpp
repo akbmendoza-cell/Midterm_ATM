@@ -5,8 +5,8 @@ void clientMenu (vector<string>& cardNumbers,
                  vector<string>& optionsBank, 
                  vector<string>& typeAccount, 
                  vector<string>& typeTransaction, 
-                 vector<string>& transcationAmounts, 
-                 vector<string>& transactionFees, 
+                 vector<double>& transcationAmounts, 
+                 vector<double>& transactionFees, 
                  vector<string>& transactionDates, 
                  vector<string>& transactionTimes)  
 { 
