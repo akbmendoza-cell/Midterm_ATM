@@ -1,14 +1,8 @@
 
-void clientMenu (vector<string>& cardNumbers, 
-                 vector<string>& encodedPINs, 
-                 vector<double>& balance, 
-                 vector<string>& optionsBank, 
-                 vector<string>& typeAccount, 
-                 vector<string>& typeTransaction, 
-                 vector<double>& transcationAmounts, 
-                 vector<double>& transactionFees, 
-                 vector<string>& transactionDates, 
-                 vector<string>& transactionTimes)  
+void clientMenu (vector<string>& cardNumbers, vector<string>& encodedPINs, vector<double>& balance, 
+vector<string>& optionsBank, vector<string>& typeAccount, vector<string>& typeTransaction, 
+vector<double>& transcationAmounts, vector<double>& transactionFees, vector<string>& transactionDates, 
+vector<string>& transactionTimes)  
 { 
 string cardNum;
 string pin
@@ -37,5 +31,11 @@ if (accountIndex == -1)
 
 cout << "Please Enter Your PIN:"; 
 cin >> pin; 
+
+if(encodeString(pin) != encodedPINs[accountIndex]) 
+{ 
+  cout << "Incorrect PIN, sorry"; 
+return; 
+} 
 
 
