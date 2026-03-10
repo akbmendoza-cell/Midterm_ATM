@@ -8,8 +8,6 @@ string cardNum;
 string pin
 int accountIndex = -1; 
 
-// To find card, if accountIndex == -1. Card not found
-
 cout << "Enter your card number: "; 
 cin >> cardNumbers; 
 
