@@ -18,6 +18,7 @@ string encodeString(string plain);
 string decodeString(string encoded);
 bool validateCardNumber(string card);
 double calculateFeeRecursive(double amount, int iterations);
+
 vector<string> cardNumbers;
 // Parallel vectors - keep in sync!
 
@@ -57,15 +58,23 @@ int main()
     vector<string> cardNumbers;
     vector<string> encodedPINs;
     vector<double> balances;
-    // ... more vectors ...
-
+    vector<string> userBanks; 
+    vector<string> accountTypes; 
+    vector<string> transactionTypes; 
+    vector<double> transactionAmounts; 
+    vector<double> transactionFees; 
+    vector<string> transactionDates; 
+    vector<string> transactionTimes; 
+       
     while (true) {
         int role = login();  // No parameters needed
 
         if (role == 1)
         {
-            clientMenu(cardNumbers, encodedPINs, balances
-                       /*, ... other vectors */);  // Pass by reference
+            clientMenu(cardNumbers, encodedPINs, balances, userBanks, 
+               accountTypes, transactionTypes, transactionAmounts, 
+               transactionFees, transactionDates, transactionTimes); 
+                       
         } 
             else if (role == 2) 
             {
@@ -128,10 +137,11 @@ for (int i = 0; i < cardNumbers.size(); i++)
 { 
   if(cardNumbers[i] == cardNum) 
   { 
-  accountIndex = i; 
-  break; 
+     accountIndex = i; 
+     break; 
   } 
 } 
+
 if (accountIndex == -1) 
 { 
   cout << "Card not found"; 
@@ -143,8 +153,8 @@ cin >> pin;
 
 if(encodeString(pin) != encodedPINs[accountIndex]) 
 { 
-  cout << "Incorrect PIN, sorry"; 
-return; 
+     cout << "Incorrect PIN, sorry"; 
+   return; 
 } 
 
 int choice = 0; 
@@ -156,11 +166,11 @@ while choice(choice != 6)
   tm* timeinfo = localtime(&now); 
 
 cout << "===================" << endl; 
-cout << "Date: " << t->tm_mon + 1 << "/" << t->tm_mday << "/" << t->tm_year + 1900 << endl; 
-cout << "Time: " << t->tm_hour << ":" << t->tm_min << endl; 
-cout << "Bamks: " << userBanks[accountIndex] << endl; 
+cout << "Date: " << timeinfo->tm_mon + 1 << "/" << timeinfo->tm_mday << "/" << timeinfo->tm_year + 1900 << endl;  
+cout << "Time: " << timeinfo->tm_hour << ":" << timeinfo->tm_min << endl; 
+cout << "Bank: " << usersBank[accountIndex] << endl; 
 cout << "Account Type: " << accountTypes[accountIndex] << endl; 
-cout << "Current Balance (PHP): " << balances[accountIndex] << endl; 
+cout << "Current Balance (PHP): " << balances[accountIndex] << endl;
 
 cout << "=== CLIENT MENU ===" << endl; 
 cout << "1. Check Balance" << endl; 
@@ -169,6 +179,9 @@ cout << "3. Transfer" << endl;
 cout << "4. Transaction History" << endl; 
 cout << "5. Change Pin" << endl; 
 cout << "6. LOGOUT" << endl; 
+
+cout << "Enter your choice: " << endl; 
+cin >> choice; 
 
 if(choice == 1) 
 { 
@@ -199,9 +212,136 @@ else
 { 
   cout << "Enter Amount: " << endl; 
   cin >> amount; 
-} //exit
+} 
 
+if(amount <= 0) { 
+   cout << "Amount Invalid" << endl; 
+   continue ; 
+} 
 
+double fee = 20; 
+
+if(balances[accountIndex] >= amount + fee) { 
+     balances[accountIndex] -= (amount + fee); 
+
+  int b5000 = 0;
+  int b1000 = 0; 
+  int b500 = 0; 
+  int b100 = 0; 
+
+    calculateBills(amount, b5000, b1000, b500, b100); 
+
+  cout << "=== RECEIPT ==="<< endl; 
+  cout << "Amount: " << amount << endl; 
+  cout << "Fee: " << fee << endl; 
+  cout << "5000 bills: " << b5000 << endl; 
+  cout << "1000 bills: " << b1000 << endl; 
+  cout << "500 bills: " << b500 << endl; 
+  cout << "100 bills: " << b100 << endl; 
+
+  transactionTypes.push_back("Withdraw"); 
+  transactionAmounts.push_back(amount); 
+  transactionFees.push_back(fee); 
+  transactionTimes.push_back("recent"); 
+} 
+  else
+{ 
+  cout << "Not Enough Balance, Sorry" << endl; 
+} 
+  } 
+  else if (choice == 3) { 
+    string receiver; 
+    double amount; 
+
+    cout << "Enter Recipient Card Number: "; 
+    cin >> receiver; 
+
+  int receiverIndex = -1;
+
+  for(int i = 0; i < cardNumbers.size(); i++) { 
+    if(cardNumbers[i] == receiver) { 
+      receiverIndex = i; 
+    break; 
+    } 
+  } 
+
+  if(receiverIndex == -1) { 
+    cout << "Recepient not found" << endl; 
+  } 
+  else { 
+    cout << "Enter Amount: " << endl; 
+    cin >> amount; 
+
+  if (amount <= 0) { 
+    cout << "Amount Invalid";  
+    continue; 
+  }  
+
+      
+    double fee = 20; 
+
+    if(balances[accountIndex] >= amount + fee) { 
+    balances[accountIndex] -= (amount + fee); 
+    balances[receiverIndex] += amount; 
+
+    cout << "Transfer Successful. Thank you! " << endl; 
+
+    transactionTypes.push_back("Transfer"); 
+    transactionAmounts.push_back(amount);
+    transactionFees.push_back(fee); 
+    transactionTimes.push_back("recent"); 
+  }
+      
+else { 
+  cout << "Not Enough Balance, Sorry" << endl; 
+} 
+  } 
+    }
+
+else if (choice == 4) { 
+    cout << "=== TRANSACTION HISTORY === "; 
+
+int start = 0; 
+
+    if(transactionTypes.size() > 10) 
+      start = transactionTypes.size() - 10; 
+    for(int i = start; i < transactionTypes.size(); i++) { 
+    cout << transactionTypes[i] << " | "   
+     << transactionAmounts[i] << " | "   
+     << transactionFees[i] << " | "  
+     << transactionTimes[i] << " | " << endl; 
+      
+  } 
+} 
+
+else if(choice == 5) { 
+    string oldPin; 
+    string newPin; 
+
+    cout << "Enter Old Pin: " << endl; 
+    cin >> oldPin; 
+
+    if(encodeString(oldPin) == encodedPINs[accountIndex]) { 
+      cout << "Enter New Pin: " << endl; 
+      cin >> newPin; 
+
+      if(newPin != oldPin) { 
+      encodedPINs[accountIndex] = encodeString(newPin); 
+      cout << "PIN has been changed successfully! " << endl; 
+    } 
+      else { 
+      cout << "PIN is the same. Please enter new pin. " << endl; 
+    } 
+  } 
+  else { 
+    cout << "Old pin incorrect" << endl; 
+  } 
+} 
+  else if (choice == 6)  { 
+      cout << "Logging out. Thank you! " << endl; 
+    } 
+  } 
+} 
 
 // Admin operations (pass by reference)
 void adminMenu (vector<string>& cardNumbers,
