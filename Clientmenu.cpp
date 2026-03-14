@@ -1,7 +1,7 @@
 
 void clientMenu (vector<string>& cardNumbers, vector<string>& encodedPINs, vector<double>& balances, 
-vector<string>& usersBank, vector<string>& accountTypes, vector<string>& typeTransaction, 
-vector<double>& transcationAmounts, vector<double>& transactionFees, vector<string>& transactionDates, 
+vector<string>& usersBank, vector<string>& accountTypes, vector<string>& transactionTypes, 
+vector<double>& transactionAmounts, vector<double>& transactionFees, vector<string>& transactionDates, 
 vector<string>& transactionTimes)  
 { 
 
@@ -42,7 +42,7 @@ int accountIndex = -1;
   cout << "===================" << endl; 
   cout << "Date: " << timeinfo->tm_mon + 1 << "/" << timeinfo->tm_mday << "/" << timeinfo->tm_year + 1900 << endl;  
   cout << "Time: " << timeinfo->tm_hour << ":" << timeinfo->tm_min << endl; 
-  cout << "Bank: " << userBank[accountIndex] << endl; 
+  cout << "Bank: " << usersBank[accountIndex] << endl; 
   cout << "Account Type: " << accountTypes[accountIndex] << endl; 
   cout << "Current Balance (PHP): " << balances[accountIndex] << endl; 
 
@@ -181,10 +181,10 @@ int start = 0;
     if(transactionTypes.size() > 10) 
       start = transactionTypes.size() - 10; 
     for(int i = start; i < transactionTypes.size(); i++) { 
-    cout << transactionTypes[i] << " | " << endl;  
-    cout << transactionAmounts[i] << " | " << endl;  
-    cout << transactionFees[i] << " | " << endl; 
-    cout << transactionTimes[i] << " | " << endl; 
+    cout << transactionTypes[i] << " | "   
+     << transactionAmounts[i] << " | "   
+     << transactionFees[i] << " | "  
+     << transactionTimes[i] << " | " << endl; 
       
   } 
 } 
