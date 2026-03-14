@@ -128,7 +128,7 @@ else
     string receiver; 
     double amount; 
 
-    cout << "Enter Receipient Card Number: "; 
+    cout << "Enter Recipient Card Number: "; 
     cin >> receiver; 
 
   int receiverIndex = -1;
