@@ -71,6 +71,7 @@ cout << "1. Withdraw 100" << endl;
 cout << "2. Withdraw 500" << endl; 
 cout << "3. Withdraw 1000" << endl; 
 cout << "4. Withdraw 5000" << endl; 
+cout << "Custom Amount" << endl; 
 cout << "Choice: " << endl; 
 cin >> opt; 
 
@@ -87,3 +88,17 @@ else
   cout << "Enter Amount: " << endl; 
   cin >> amount; 
 } 
+
+double fee = 20; 
+
+if(balances[accountIndex] >= amount + fee)
+{ 
+  balances[accountIndex] -= (amount + fee); 
+
+  int b5000 = 0;
+  int b1000 = 0; 
+  int b500 = 0; 
+  int b100 = 0; 
+
+  calculateBills(amount, b5000, b1000, b500, b100); 
+
