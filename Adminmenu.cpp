@@ -3,12 +3,15 @@
 #include <vector>
 #include <ctime>
 using namespace std;
+
 string ADMIN_PASSCODE = "6767";
+
 const int NUM_BANKS = 4;
 string bankNames[NUM_BANKS] = {"BDO", "BPI", "Metrobank", "Security Bank"};
 double localFees[NUM_BANKS] = {25, 20, 30, 15};
 double intlFees[NUM_BANKS] = {150, 125, 200, 100};
 double dailyLimits[NUM_BANKS] = {50000, 75000, 100000, 60000};
+
 const int NUM_DENOMINATIONS = 2;
 int denominations[NUM_DENOMINATIONS] = {500, 1000};
 int billCount[NUM_DENOMINATIONS] = {500, 500}; // Current count of each 
