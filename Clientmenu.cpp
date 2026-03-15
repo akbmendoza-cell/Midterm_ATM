@@ -1,8 +1,7 @@
 
 void clientMenu (vector<string>& cardNumbers, vector<string>& encodedPINs, vector<double>& balances, 
 vector<string>& usersBank, vector<string>& accountTypes, vector<string>& transactionTypes, 
-vector<double>& transactionAmounts, vector<double>& transactionFees, vector<string>& transactionDates, 
-vector<string>& transactionTimes, vector<int>& transactionQuantities)  
+vector<double>& transactionAmounts, vector<double>& transactionFees, vector<int>& transactionQuantities)  
 { 
 
 string cardNum;
@@ -101,7 +100,7 @@ else
     cout << "Withdrawed Successfully"<< endl; 
     bool found = false; 
   
-  for(int i = 0; i < transactionTypes.size(); +))
+  for(int i = 0; i < transactionTypes.size(); i++)
     { 
       if(transactionTypes[i] == "Withdraw" && 
         transactionAmounts[i] == amount && 
@@ -164,7 +163,7 @@ else
     cout << "Transfer Successful. Thank you! " << endl; 
     bool  found = false; 
 
-      for(int = 0; i < transactionTypes.size(); i++) 
+      for(int i = 0; i < transactionTypes.size(); i++) 
         { 
           if(transactionTypes[i] == "Transfer" && 
             transactionAmounts[i] == amount && 
@@ -195,7 +194,7 @@ else if (choice == 4)
 { 
     cout << "=== TRANSACTION HISTORY === "; 
 
-    for(int = 0; i < transactionTypes.size(); i++) 
+    for(int i = 0; i < transactionTypes.size(); i++) 
       { 
         cout << transactionTypes[i] << " | "
           << transactionAmounts[i] << " | "
