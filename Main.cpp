@@ -153,11 +153,11 @@ void clientMenu() {
     }
     
     if (accountIndex == -1) {
-        cout << "Card not found";
+        cout << "\nCard not found\n";
         return;
     }
 
-    cout << "Please Enter Your PIN:";
+    cout << "Please Enter Your PIN: ";
     cin >> pin;
 
     if(encodeString(pin) != encodedPINs[accountIndex]) {
@@ -170,21 +170,22 @@ void clientMenu() {
         time_t now = time(0);
         tm* timeinfo = localtime(&now);  
         
-        cout << "===================" << endl;
+        cout << "\n===================\n" << endl;
         cout << "Date: " << timeinfo->tm_mon + 1 << "/" << timeinfo->tm_mday 
              << "/" << timeinfo->tm_year + 1900 << endl;
         cout << "Time: " << timeinfo->tm_hour << ":" << timeinfo->tm_min << endl;
         cout << "Bank: " << userBanks[accountIndex] << endl;
         cout << "Account Type: " << accountTypes[accountIndex] << endl;
         cout << "Current Balance (PHP): " << balances[accountIndex] << endl;
+        cout << "------------------------------\n"; 
 
-        cout << "=== CLIENT MENU ===" << endl;
-        cout << "1. Check Balance" << endl;
-        cout << "2. Withdraw" << endl;
-        cout << "3. Transfer" << endl;
-        cout << "4. Transaction History" << endl;
-        cout << "5. Change Pin" << endl;
-        cout << "6. LOGOUT" << endl;
+        cout << "\n=== CLIENT MENU ===\n";
+        cout << "1. Check Balance\n";
+        cout << "2. Withdraw\n";
+        cout << "3. Transfer\n";
+        cout << "4. Transaction History\n";
+        cout << "5. Change Pin\n";
+        cout << "6. LOGOUT\n";
         cout << "Enter choice: ";
         cin >> choice;
         
@@ -196,7 +197,7 @@ void clientMenu() {
             double amount = 0;
             int customAmount;
             
-            cout << "=== WITHDRAW ===" << endl;
+            cout << "\n=== WITHDRAW ===" << endl;
             cout << "1. Withdraw 100" << endl;
             cout << "2. Withdraw 500" << endl;
             cout << "3. Withdraw 1000" << endl;
@@ -210,18 +211,20 @@ void clientMenu() {
             else if(opt == 3) amount = 1000;
             else if(opt == 4) amount = 5000;
             else if(opt == 5) {
+                
+                cout << "\n----------\n";
                 cout << "Enter Amount: ";
                 cin >> customAmount;
                 amount = customAmount;
             }
 
             if (amount <= 0) {
-                cout << "Amount Invalid" << endl;
+                cout << "Amount Invalid\n\n" << endl;
                 continue;
             }
 
             if (amount > balances[accountIndex]) {
-                cout << "You don't have enough balance on your account" << endl;
+                cout << "\nYou don't have enough balance on your account\n";
                 continue;
             }
             
@@ -230,7 +233,7 @@ void clientMenu() {
 
             if(balances[accountIndex] >= totalDeduction) {
                 balances[accountIndex] -= totalDeduction;  // ✅ FIXED: Use totalDeduction
-                cout << "The withdraw is successful" << endl;
+                cout << "\nThe withdraw is successful\n" << endl;
                 
                 logTransaction("Withdrawal", amount, fee);  // ✅ FIXED: Correct call
                 
@@ -249,7 +252,7 @@ void clientMenu() {
                     transactionQuantities.push_back(1);
                 }
             } else {
-                cout << "Not Enough Balance, Sorry" << endl;
+                cout << "Not Enough Balance, Sorry\n" << endl;
             }
         }
     
@@ -257,7 +260,8 @@ void clientMenu() {
             
             string receiver;
             double amount;
-
+            
+            cout << "\n=== TRANSFER MONEY ===\n";
             cout << "Enter Recipient Card Number: ";
             cin >> receiver;
 
@@ -281,7 +285,7 @@ void clientMenu() {
                 }
 
                 if (amount > balances[accountIndex]) {
-                    cout << "You don't have enough balance on your account";
+                    cout << "\nYou don't have enough balance on your account";
                     continue;
                 }
                 
@@ -291,23 +295,32 @@ void clientMenu() {
                     balances[receiverIndex] += amount;
                     logTransaction("Transfer", amount, fee);  // ✅ FIXED
                     
-                    cout << "Transfer Successful. Thank you! " << endl;
+                    cout << "\nTransfer Successful. Thank you! " << endl;
                 } else {
-                    cout << "Not Enough Balance, Sorry" << endl;
+                    cout << "\nNot Enough Balance, Sorry" << endl;
                 }
             }
         }
         else if (choice == 4) {
-            cout << "=== TRANSACTION HISTORY === " << endl;
+            cout << "\n=== TRANSACTION HISTORY ===\n";
+            
+            if(transactionTypes.empty()) { 
+                cout << "No new transactions has occured " << endl; 
+            } 
+            
+            else { 
             for(int i = 0; i < (int)transactionTypes.size(); i++) {
                 cout << transactionTypes[i] << " | "
                      << transactionAmounts[i] << " | "
                      << transactionFees[i] << " | "
                      << "QTY: " << transactionQuantities[i] << endl;
+            } 
             }
         }
         else if(choice == 5) {
             string oldPin, newPin;
+            
+            cout << "\n===PIN CHANGE===\n";
             cout << "Enter Old Pin: ";
             cin >> oldPin;
 
@@ -317,9 +330,9 @@ void clientMenu() {
 
                 if(newPin != oldPin) {
                     encodedPINs[accountIndex] = encodeString(newPin);
-                    cout << "PIN has been changed successfully! " << endl;
+                    cout << "\nPIN has been changed successfully! " << endl;
                 } else {
-                    cout << "PIN is the same. Please enter new pin. " << endl;
+                    cout << "\nPIN is the same. Please enter new pin. " << endl;
                 }
             } else {
                 cout << "Old pin incorrect" << endl;
