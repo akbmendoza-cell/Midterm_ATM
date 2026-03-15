@@ -2,7 +2,7 @@
 void clientMenu (vector<string>& cardNumbers, vector<string>& encodedPINs, vector<double>& balances, 
 vector<string>& usersBank, vector<string>& accountTypes, vector<string>& transactionTypes, 
 vector<double>& transactionAmounts, vector<double>& transactionFees, vector<string>& transactionDates, 
-vector<string>& transactionTimes)  
+vector<string>& transactionTimes, vector<int>& transactionQuantities)  
 { 
 
 string cardNum;
@@ -70,7 +70,6 @@ double amount;
   cout << "2. Withdraw 500" << endl; 
   cout << "3. Withdraw 1000" << endl; 
   cout << "4. Withdraw 5000" << endl; 
-  cout << "Custom Amount" << endl; 
   cout << "Choice: " << endl; 
   cin >> opt; 
 
@@ -93,37 +92,39 @@ else
     continue; 
   } 
 
-  
   double fee = 20; 
 
-  if(balances[accountIndex] >= amount + fee) { 
+  if(balances[accountIndex] >= amount + fee) 
+  { 
      balances[accountIndex] -= (amount + fee); 
 
-  int b5000 = 0;
-  int b1000 = 0; 
-  int b500 = 0; 
-  int b100 = 0; 
-
-    calculateBills(amount, b5000, b1000, b500, b100); 
-
-  cout << "=== RECEIPT ==="<< endl; 
-  cout << "Amount: " << amount << endl; 
-  cout << "Fee: " << fee << endl; 
-  cout << "5000 bills: " << b5000 << endl; 
-  cout << "1000 bills: " << b1000 << endl; 
-  cout << "500 bills: " << b500 << endl; 
-  cout << "100 bills: " << b100 << endl; 
-
-  transactionTypes.push_back("Withdraw"); 
-  transactionAmounts.push_back(amount); 
-  transactionFees.push_back(fee); 
-  transactionTimes.push_back("recent"); 
-} 
+    cout << "Withdrawed Successfully"<< endl; 
+    bool found = false; 
+  
+  for(int i = 0; i < transactionTypes.size(); +))
+    { 
+      if(transactionTypes[i] == "Withdraw" && 
+        transactionAmounts[i] == amount && 
+        transactionFees[i] == fee) 
+      { 
+        transactionQuantities[i]++; 
+        found = true; 
+        break; 
+      } 
+    } 
+  if(!found) 
+  { 
+    transactionTypes.push_back("Withdraw"); 
+    transactionAmounts.push_back(amount); 
+    transactionFees.push_back(fee); 
+    transactionQuantities.push_back(1); 
+    } 
+  } 
   else
 { 
   cout << "Not Enough Balance, Sorry" << endl; 
-} 
   } 
+} 
   else if (choice == 3) { 
     string receiver; 
     double amount; 
@@ -143,16 +144,17 @@ else
   if(receiverIndex == -1) { 
     cout << "Recipient not found" << endl; 
   } 
-  else { 
+  else 
+  { 
     cout << "Enter Amount: " << endl; 
     cin >> amount; 
 
-  if (amount <= 0) { 
+  if (amount <= 0) 
+  { 
     cout << "Amount Invalid";  
     continue; 
   }  
 
-      
     double fee = 20; 
 
     if(balances[accountIndex] >= amount + fee) { 
@@ -160,32 +162,42 @@ else
     balances[receiverIndex] += amount; 
 
     cout << "Transfer Successful. Thank you! " << endl; 
+    bool  found = false; 
 
-    transactionTypes.push_back("Transfer"); 
-    transactionAmounts.push_back(amount);
-    transactionFees.push_back(fee); 
-    transactionTimes.push_back("recent"); 
-  }
+      for(int = 0; i < transactionTypes.size(); i++) 
+        { 
+          if(transactionTypes[i] == "Transfer" && 
+            transactionAmounts[i] == amount && 
+            transactionFees[i] == fee) 
+          { 
+            transactionQuantities[i]++; 
+            found = true; 
+            break; 
+          } 
+         }
       
-else { 
-  cout << "Not Enough Balance, Sorry" << endl; 
-} 
+      if(!found)
+      { 
+        transactionTypes.push_back("Transfer"); 
+        transactionAmounts.push_back(amount); 
+        transactionFees.push_back(fee); 
+        transactionQuantities.push_back(1); 
+      } 
+    } 
+else 
+      { 
+    cout << "Not Enough Balance, Sorry" << endl; 
+    } 
   } 
-    }
+}
 
-else if (choice == 4) { 
+else if (choice == 4) 
+{ 
     cout << "=== TRANSACTION HISTORY === "; 
 
-int start = 0; 
-
-    if(transactionTypes.size() > 10) 
-      start = transactionTypes.size() - 10; 
-    for(int i = start; i < transactionTypes.size(); i++) { 
-    cout << transactionTypes[i] << " | "   
-     << transactionAmounts[i] << " | "   
-     << transactionFees[i] << " | "  
-     << transactionTimes[i] << endl; 
-      
+    for(int = 0; i < transactionTypes.size(); i++) 
+      { 
+        cout << transactionTypes[i] << " | "
   } 
 } 
 
