@@ -340,6 +340,7 @@ void clientMenu() {
             }
         }
         else if (choice == 6) {
+            cout <<"\n===LOGOUT===\n"; 
             cout << "Logging out. Thank you! " << endl;
         }
     } while (choice != 6);
