@@ -198,12 +198,14 @@ else if (choice == 4)
     for(int = 0; i < transactionTypes.size(); i++) 
       { 
         cout << transactionTypes[i] << " | "
+          << transactionAmounts[i] << " | "
+          << transactionFees[i] << " | "
+          << "QTY: " << transactionQuantities[i] << endl; 
   } 
 } 
 
 else if(choice == 5) { 
-    string oldPin; 
-    string newPin; 
+    string oldPin, newPin; 
 
     cout << "Enter Old Pin: " << endl; 
     cin >> oldPin; 
