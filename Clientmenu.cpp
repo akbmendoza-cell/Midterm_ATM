@@ -36,7 +36,7 @@ int accountIndex = -1;
 do { 
 
     time_t now = time(0); 
-    tm* timeinfo = locatltime(&now);
+    tm* timeinfo = localtime(&now);
    
   cout << "===================" << endl; 
   cout << "Date: " << timeinfo->tm_mon + 1 << "/" << timeinfo->tm_mday << "/" << timeinfo->tm_year + 1900 << endl;  
@@ -105,7 +105,7 @@ else if(opt == 5) {
   } 
    
   double fee = 20; 
-  double totalDeduction = amount + fee
+  double totalDeduction = amount + fee;
 
   if(balances[accountIndex] >= totalDeduction) 
   { 
@@ -176,7 +176,7 @@ else if(opt == 5) {
   } 
      
     double fee = 20; 
-    double totalDeduction = amount + fee
+    double totalDeduction = amount + fee;
 
     
     if(balances[accountIndex] >= totalDeduction) { 
