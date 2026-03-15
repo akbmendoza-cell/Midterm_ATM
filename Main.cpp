@@ -233,20 +233,20 @@ void clientMenu() {
 
             if(balances[accountIndex] >= totalDeduction) {
                 balances[accountIndex] -= totalDeduction;  // ✅ FIXED: Use totalDeduction
-                cout << "\nThe withdraw is successful\n" << endl;
+                cout << "\nThe al was successful\n" << endl;
                 
-                logTransaction("Withdrawal", amount, fee);  // ✅ FIXED: Correct call
+                logTransaction("withdrawal", amount, fee);  // ✅ FIXED: Correct call
                 
                 bool found = false;
                 for(int i = 0; i < (int)transactionTypes.size(); i++) {
-                    if(transactionTypes[i] == "Withdraw") {
+                    if(transactionTypes[i] == "al") {
                         transactionQuantities[i]++;
                         found = true;
                         break;
                     }
                 }
                 if(!found) {
-                    transactionTypes.push_back("Withdraw");
+                    transactionTypes.push_back("al");
                     transactionAmounts.push_back(amount);
                     transactionFees.push_back(fee);
                     transactionQuantities.push_back(1);
