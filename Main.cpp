@@ -178,7 +178,7 @@ int accountIndex = -1;
 do { 
 
     time_t now = time(0); 
-    tm* timeinfo = locatltime(&now);
+    tm* timeinfo = localtime(&now);
    
   cout << "===================" << endl; 
   cout << "Date: " << timeinfo->tm_mon + 1 << "/" << timeinfo->tm_mday << "/" << timeinfo->tm_year + 1900 << endl;  
