@@ -65,6 +65,7 @@ int main()
     vector<double> transactionFees; 
     vector<string> transactionDates; 
     vector<string> transactionTimes; 
+    vector<int> transactionQuantities; 
        
     while (true) 
     {
@@ -83,7 +84,8 @@ int main()
                             transactionAmounts, 
                             transactionFees, 
                             transactionDates, 
-                            transactionTimes
+                            transactionTimes, 
+                            transactionQuantities
                         ); 
                        
         } 
