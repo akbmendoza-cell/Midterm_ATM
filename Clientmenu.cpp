@@ -141,7 +141,7 @@ else
   } 
 
   if(receiverIndex == -1) { 
-    cout << "Recepient not found" << endl; 
+    cout << "Recipient not found" << endl; 
   } 
   else { 
     cout << "Enter Amount: " << endl; 
@@ -184,7 +184,7 @@ int start = 0;
     cout << transactionTypes[i] << " | "   
      << transactionAmounts[i] << " | "   
      << transactionFees[i] << " | "  
-     << transactionTimes[i] << " | " << endl; 
+     << transactionTimes[i] << endl; 
       
   } 
 } 
