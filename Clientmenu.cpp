@@ -105,11 +105,14 @@ else if(opt == 5) {
   } 
    
   double fee = 20; 
+  double totalDeduction = amount + fee
 
-  if(balances[accountIndex] >= amount + fee) 
+  if(balances[accountIndex] >= totalDeduction) 
   { 
-     balances[accountIndex] -= (amount + fee); 
+     balances[accountIndex] -= totalDeduction; 
 
+     logTransaction(cardNumbers[accountIndex], "Withdrawal", amount, fee); 
+ 
     cout << "The withdraw is successfull"<< endl; 
     bool found = false; 
   
