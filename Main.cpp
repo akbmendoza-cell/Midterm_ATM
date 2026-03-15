@@ -147,8 +147,8 @@ void displaymenu(const vector<string>& items,
 void clientMenu (
                     vector<string>& cardNumbers, vector<string>& encodedPINs, vector<double>& balances, 
                     vector<string>& usersBank, vector<string>& accountTypes, vector<string>& typeTransaction, 
-                    vector<double>& transcationAmounts, vector<double>& transactionFees, vector<string>& transactionDates, 
-                    vector<string>& transactionTimes
+                    vector<double>& transcationAmounts, vector<double>& transactionFees, 
+                    vector<int>& transactionQuantities
                 )  
 { 
     string cardNum;
