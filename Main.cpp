@@ -62,9 +62,7 @@ int main()
     vector<string> accountTypes; 
     vector<string> transactionTypes; 
     vector<double> transactionAmounts; 
-    vector<double> transactionFees; 
-    vector<string> transactionDates; 
-    vector<string> transactionTimes; 
+    vector<double> transactionFees;  
     vector<int> transactionQuantities; 
        
     while (true) 
@@ -82,9 +80,7 @@ int main()
                             accountTypes, 
                             transactionTypes, 
                             transactionAmounts, 
-                            transactionFees, 
-                            transactionDates, 
-                            transactionTimes, 
+                            transactionFees,  
                             transactionQuantities
                         ); 
                        
