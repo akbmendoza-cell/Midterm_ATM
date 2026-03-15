@@ -1,7 +1,7 @@
-
-void clientMenu (vector<string>& cardNumbers, vector<string>& encodedPINs, vector<double>& balances, 
-vector<string>& usersBank, vector<string>& accountTypes, vector<string>& transactionTypes, 
-vector<double>& transactionAmounts, vector<double>& transactionFees, vector<int>& transactionQuantities)  
+void clientMenu 
+               (vector<string>& cardNumbers, vector<string>& encodedPINs, vector<double>& balances, 
+               vector<string>& usersBank, vector<string>& accountTypes, vector<string>& transactionTypes, 
+               vector<double>& transactionAmounts, vector<double>& transactionFees, vector<int>& transactionQuantities)  
 { 
 
 string cardNum;
@@ -31,13 +31,13 @@ int accountIndex = -1;
   return; 
 } 
 
-  int choice = 0; 
+  int choice;  
 
-  while (choice != 6) { 
+do { 
 
     time_t now = time(0); 
-    tm* timeinfo = localtime(&now); 
-
+    tm* timeinfo = locatltime(&now);
+   
   cout << "===================" << endl; 
   cout << "Date: " << timeinfo->tm_mon + 1 << "/" << timeinfo->tm_mday << "/" << timeinfo->tm_year + 1900 << endl;  
   cout << "Time: " << timeinfo->tm_hour << ":" << timeinfo->tm_min << endl; 
@@ -57,33 +57,41 @@ int accountIndex = -1;
   cin >> choice; 
     
   if(choice == 1) { 
-    cout << "Your Balance is: (PHP) " << balances[accountIndex] << endl; 
+    cout << "Your Balance is: (PHP) " << balances[accountIndex] << endl;
+
 } 
   else if (choice == 2) 
 { 
 
 int opt; 
-double amount; 
-
+double amount = 0; 
+int customAmount; 
+   
+  cout << "=== WITHDRAW ===" << endl; 
   cout << "1. Withdraw 100" << endl; 
   cout << "2. Withdraw 500" << endl; 
   cout << "3. Withdraw 1000" << endl; 
   cout << "4. Withdraw 5000" << endl; 
+  cout << "5. Enter other amount" << endl; 
   cout << "Choice: " << endl; 
   cin >> opt; 
 
-if(opt == 1) 
-  amount = 100; 
-else if(opt == 2) 
-  amount = 500; 
-else if(opt == 3) 
-  amount = 1000; 
-else if(opt == 4)
-  amount = 5000; 
-else 
-  { 
+if(opt == 1){ 
+  amount = 100;
+} 
+else if(opt == 2){ 
+  amount = 500;
+} 
+else if(opt == 3){  
+  amount = 1000;
+} 
+else if(opt == 4){ 
+  amount = 5000;
+} 
+else if(opt == 5) { 
     cout << "Enter Amount: " << endl; 
-    cin >> amount; 
+    cin >> customAmount;
+    amount = customAmount; 
   } 
 
   if (amount <= 0) { 
@@ -91,33 +99,38 @@ else
     continue; 
   } 
 
+  if (amount > balances[accountIndex]) { 
+     cout << "You don't have enough balance on your account" << endl; 
+     continue; 
+  } 
+   
   double fee = 20; 
 
   if(balances[accountIndex] >= amount + fee) 
   { 
      balances[accountIndex] -= (amount + fee); 
 
-    cout << "Withdrawed Successfully"<< endl; 
+    cout << "The withdraw is successfull"<< endl; 
     bool found = false; 
   
-  for(int i = 0; i < transactionTypes.size(); i++)
-    { 
+  for(int i = 0; i < transactionTypes.size(); i++) { 
       if(transactionTypes[i] == "Withdraw" && 
         transactionAmounts[i] == amount && 
-        transactionFees[i] == fee) 
-      { 
+        transactionFees[i] == fee) { 
+         
         transactionQuantities[i]++; 
         found = true; 
         break; 
       } 
     } 
-  if(!found) 
-  { 
+  if(!found) { 
+     
     transactionTypes.push_back("Withdraw"); 
     transactionAmounts.push_back(amount); 
     transactionFees.push_back(fee); 
     transactionQuantities.push_back(1); 
     } 
+     
   } 
   else
 { 
@@ -154,6 +167,11 @@ else
     continue; 
   }  
 
+  if (amount > balances[accountIndex]) { 
+     cout << "You don't have enough balance on your account"; 
+     continue; 
+  } 
+     
     double fee = 20; 
 
     if(balances[accountIndex] >= amount + fee) { 
@@ -192,7 +210,7 @@ else
 
 else if (choice == 4) 
 { 
-    cout << "=== TRANSACTION HISTORY === "; 
+    cout << "=== TRANSACTION HISTORY === " << endl; 
 
     for(int i = 0; i < transactionTypes.size(); i++) 
       { 
@@ -228,5 +246,5 @@ else if(choice == 5) {
   else if (choice == 6)  { 
       cout << "Logging out. Thank you! " << endl; 
     } 
-  } 
+  } while (choice != 6); 
 } 
