@@ -176,11 +176,15 @@ else if(opt == 5) {
   } 
      
     double fee = 20; 
+    double totalDeduction = amount + fee
 
-    if(balances[accountIndex] >= amount + fee) { 
-    balances[accountIndex] -= (amount + fee); 
+    
+    if(balances[accountIndex] >= totalDeduction) { 
+    balances[accountIndex] -= totalDeduction; 
     balances[receiverIndex] += amount; 
 
+    logTransaction(cardNumbers[accountIndex], "Transfer", amount, fee); 
+    
     cout << "Transfer Successful. Thank you! " << endl; 
     bool  found = false; 
 
