@@ -1,4 +1,4 @@
-#include <iostream>
+y4#include <iostream>
 #include <vector>
 #include <ctime>
 #include <string>
@@ -532,6 +532,7 @@ void adminMenu()
                                 userBanks.erase(userBanks.begin() + index);
                                 accountTypes.erase(accountTypes.begin() + index);
                                 balances.erase(balances.begin() + index);
+                                cout << "Account deleted successfully.";
                             } 
                                 else 
                                 {
