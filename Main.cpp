@@ -12,9 +12,9 @@ double localFees[NUM_BANKS] = {25, 20, 30, 15};
 double intlFees[NUM_BANKS] = {150, 125, 200, 100};
 double dailyLimits[NUM_BANKS] = {50000, 75000, 100000, 60000};
 
-const int NUM_DENOMINATIONS = 2;
-int denominations[NUM_DENOMINATIONS] = {500, 1000};
-int billCount[NUM_DENOMINATIONS] = {500, 500};
+const int NUM_DENOMINATIONS = 3;
+int denominations[NUM_DENOMINATIONS] = {500, 1000, 5000};
+int billCount[NUM_DENOMINATIONS] = {500, 500, 500};
 
 // Global vectors
 vector<string> cardNumbers;
