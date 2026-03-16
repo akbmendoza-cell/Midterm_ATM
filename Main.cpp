@@ -124,7 +124,7 @@ int login()
     string passcode;
     
     cout << "=============================\n";
-    cout << "          BPI ATM BANK\n";
+    cout << "          ARC ATM BANK\n";
     cout << "=============================\n\n";
     cout << "[1] User   [2] Admin   [3] Shutdown\n";
     cout << "Enter choice: ";
