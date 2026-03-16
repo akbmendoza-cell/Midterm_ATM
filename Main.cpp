@@ -171,7 +171,7 @@ void clientMenu()
             if(encodeString(pin) != encodedPINs[accountIndex]) 
             {
                 cout << "Incorrect PIN, sorry" << endl;
-                
+                return;
             }
 
     
